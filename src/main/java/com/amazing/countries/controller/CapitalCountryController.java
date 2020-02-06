@@ -9,7 +9,10 @@ import javax.websocket.server.PathParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -17,6 +20,8 @@ import com.amazing.countries.model.capitalcity.CapitalCity;
 import com.amazing.countries.repository.CapitalCityRepository;
 
 @RestController
+@CrossOrigin
+@RequestMapping("api/public")
 public class CapitalCountryController {
 
 	Logger logger = LoggerFactory.getLogger(CapitalCountryController.class);
@@ -42,13 +47,14 @@ public class CapitalCountryController {
 	@Autowired
 	private RestTemplate restTemplate;
 
-	@GetMapping(value = { "/getByCapitalCity" })
-	public Optional<CapitalCity> getByCapitalCity(@PathParam(value = "capitalCityName") String capitalCityName) {
+	@GetMapping(value = { "getByCapitalCity" })
+	public CapitalCity getByCapitalCity(@RequestParam(value = "capitalCityName") String capitalCityName) {
+		System.out.println("**********************in getcapitalbycity*************************");
 		CapitalCity capitalCity = new CapitalCity();
 		Optional<CapitalCity> cities = null;
 		logger.info("capital name " + capitalCityName);
 
-		String url = "https://restcountries.eu/rest/v2/capital/" + capitalCityName;
+		String url = "" + capitalCityName;
 
 		CapitalCity[] CapitalCity = restTemplate.getForObject(url, CapitalCity[].class);
 
@@ -92,11 +98,12 @@ public class CapitalCountryController {
 		cities = capitalCityRepository.findById(id);
 		// List<Object> cities = Arrays.asList(capitalCity);
 
-		return cities;
+		return capitalCity;
 
 	}
 
-	@GetMapping(value = { "/getAllCountries" })
+	@GetMapping(value = { "admin/getAllCountries" })
+
 	public List<CapitalCity> getAllCountries() {
 		int i = 0;
 		String url = "";

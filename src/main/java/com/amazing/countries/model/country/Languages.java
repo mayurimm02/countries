@@ -1,4 +1,4 @@
-package com.amazing.countries.model.capitalcity;
+package com.amazing.countries.model.country;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

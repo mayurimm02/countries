@@ -8,4 +8,5 @@ import com.amazing.countries.model.country.CapitalCity;
 
 public interface CapitalCityRepository extends JpaRepository<CapitalCity, Integer> {
 	public Optional<CapitalCity> findByCapital(String capital);
+	
 }

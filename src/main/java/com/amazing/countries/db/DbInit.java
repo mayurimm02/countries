@@ -48,7 +48,7 @@ public class DbInit implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		System.out.println("*********************isdatainserted from repo " + "*************************");
-		check = checkRepository.findTopByOrderByIdDesc();
+		//check = checkRepository.findTopByOrderByIdDesc();
 
 		if (check.get().getIsDataIntersted() == false) {
 			String url = "https://restcountries.eu/rest/v2/all";

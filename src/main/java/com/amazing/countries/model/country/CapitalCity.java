@@ -1,10 +1,12 @@
 package com.amazing.countries.model.country;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,16 +15,19 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-@JsonIgnoreProperties(value = "ignoreUnknown")
+//@JsonIgnoreProperties(value = "ignoreUnknown")
 @Entity
 @Table(name = "CapitalCity")
-public class CapitalCity {
+public class CapitalCity implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6934604958229531061L;
 
 	@Id
 	@Column(name = "capital_id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer capital_id;
 
 	@Column
@@ -70,7 +75,7 @@ public class CapitalCity {
 	@JoinColumn(name = "capital_id", referencedColumnName = "capital_id")
 
 	private List<Languages> languages;
-
+	@Embedded	
 	private Translations translations;
 
 	@Column
@@ -289,6 +294,18 @@ public class CapitalCity {
 
 	public void setCioc(String cioc) {
 		this.cioc = cioc;
+	}
+
+	@Override
+	public String toString() {
+		return "CapitalCity [capital_id=" + capital_id + ", name=" + name + ", topLevelDomain=" + topLevelDomain
+				+ ", alpha2Code=" + alpha2Code + ", alpha3Code=" + alpha3Code + ", callingCodes=" + callingCodes
+				+ ", capital=" + capital + ", altSpellings=" + altSpellings + ", region=" + region + ", subregion="
+				+ subregion + ", population=" + population + ", latlng=" + latlng + ", demonym=" + demonym + ", area="
+				+ area + ", gini=" + gini + ", timezones=" + timezones + ", borders=" + borders + ", nativeName="
+				+ nativeName + ", numericCode=" + numericCode + ", currencies=" + currencies + ", languages="
+				+ languages + ", translations=" + translations + ", flag=" + flag + ", regionalBlocs=" + regionalBlocs
+				+ ", cioc=" + cioc + "]";
 	}
 
 }

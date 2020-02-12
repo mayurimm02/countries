@@ -1,9 +1,16 @@
 package com.amazing.countries.model.country;
 
+import java.io.Serializable;
+
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class Translations {
+public class Translations implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3255916796768430291L;
 
 	private String de;
 

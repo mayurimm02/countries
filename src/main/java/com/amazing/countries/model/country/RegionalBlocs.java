@@ -1,5 +1,6 @@
 package com.amazing.countries.model.country;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.persistence.Column;
@@ -14,10 +15,15 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "RegionalBlocs")
 @JsonIgnoreProperties(value = "ignoreUnknown")
-public class RegionalBlocs {
+public class RegionalBlocs implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 527435797083526876L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "RegionalBlocs_id")
 	private Integer regionalBlocsid;
 

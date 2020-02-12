@@ -1,5 +1,7 @@
 package com.amazing.countries.model.country;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,9 +11,16 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Currencies")
-public class Currencies {
+public class Currencies implements Serializable {
+	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6327731186200903338L;
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Currencies_id")
 	private Integer Currencies_id;
 

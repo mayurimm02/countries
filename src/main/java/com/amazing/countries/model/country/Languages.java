@@ -1,5 +1,7 @@
 package com.amazing.countries.model.country;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,9 +11,16 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Languages")
-public class Languages {
+public class Languages implements Serializable {
+	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2188388529555656495L;
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer languge_id;
 
 	@Column

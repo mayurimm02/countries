@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,6 +107,17 @@ public class CountryServiceImpl implements CountryService {
 		checkRepository.save(insertionCheck);
 
 		return countryData;
+	}
+
+	@Override
+	public boolean validateInputValue(String inputValue) {
+		logger.info("***************************** IN Service validateInput ****************************");
+
+		if (StringUtils.isNumeric(inputValue)) {
+			return true;
+		}
+
+		return false;
 	}
 
 }

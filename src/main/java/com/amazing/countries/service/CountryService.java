@@ -7,4 +7,6 @@ import com.amazing.countries.model.country.Countries;
 public interface CountryService {
 
 	public List<Countries> CountryData(Countries[] allCountries);
+
+	public boolean validateInputValue(String inputValue);
 }

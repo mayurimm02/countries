@@ -3,7 +3,6 @@ package com.amazing.countries.controller;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -56,22 +54,33 @@ public class CountryController {
 	@Autowired
 	private CountryService countryservice;
 
-	@GetMapping(value = { "getByCapitalCity" })
-	public Optional<Countries> getByCapitalCity(@RequestParam(value = "capitalCityName") String capitalCityName) {
-		System.out.println("**********************in getcapitalbycity*************************");
+	@GetMapping(value = { "getByCapitalCity/{capitalCityName}" }, produces = "application/json")
+	public ResponseEntity<?> getByCapitalCity(@PathVariable String capitalCityName) {
+		logger.info("**********************in getCapitalByCity*************************");
 		Optional<Countries> cities = null;
 		logger.info("capital name " + capitalCityName);
 
-		cities = capitalCityRepository.findByCapital(capitalCityName);
+		try {
 
-		return cities;
+			if (countryservice.validateInputValue(capitalCityName)) {
+				return ((BodyBuilder) ResponseEntity.badRequest())
+						.body(new ErrorCodes(400, "Numeric values not allowed or capitalName should not be empty"));
+			} else {
+				cities = capitalCityRepository.findByCapital(capitalCityName);
+			}
+
+			return ResponseEntity.ok().body(cities);
+		} catch (Exception e) {
+			return ((BodyBuilder) ResponseEntity.notFound()).body(new ErrorCodes(404, "NOT FOUND"));
+
+		}
 
 	}
 
-	@GetMapping(value = { "admin/getAllCountries" }, headers = "Accept=application/json")
+	@GetMapping(value = { "admin/getAllCountries" }, produces = "application/json")
 
 	public ResponseEntity<?> getAllCountries() {
-		System.out.println("**********************in getAllCountries*************************");
+		logger.info("**********************in getAllCountries*************************");
 
 		List<Countries> country;
 		try {
@@ -89,12 +98,12 @@ public class CountryController {
 	public ResponseEntity<?> getByCountryCode(@PathVariable String countryCode) {
 		Optional<Countries> retrivedCountryCode = null;
 		try {
-			System.out.println("**********************in getByCountryCode*************************");
+			logger.info("**********************in getByCountryCode*************************");
 
 			countryCode = countryCode.toUpperCase();
-			if (StringUtils.isNumeric(countryCode)) {
+			if (countryservice.validateInputValue(countryCode)) {
 				return ((BodyBuilder) ResponseEntity.badRequest())
-						.body(new ErrorCodes(400, "Country code should be numeric value"));
+						.body(new ErrorCodes(400, "Numeric country code not allowed or code should not be empty"));
 			} else {
 				if (countryCode.length() == 2) {
 					retrivedCountryCode = capitalCityRepository.findByalpha2Code(countryCode);
@@ -102,17 +111,15 @@ public class CountryController {
 					retrivedCountryCode = capitalCityRepository.findByalpha3Code(countryCode);
 				} else {
 					return ((BodyBuilder) ResponseEntity.notFound())
-							.body(new ErrorCodes(404, "Country code must be either 2 or 3 digits only"));
+							.body(new ErrorCodes(404, "Country code must be either 2 or 3 alphabets only"));
 
 				}
 
 			}
 			return ResponseEntity.ok().body(retrivedCountryCode);
 
-			// logger.info("country code " + countryCode);
-
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 			/*
 			 * return new ResponseEntity<String>("Something went wrong", new HttpHeaders(),

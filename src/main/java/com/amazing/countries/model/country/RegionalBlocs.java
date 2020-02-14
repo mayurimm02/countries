@@ -17,10 +17,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(value = "ignoreUnknown")
 public class RegionalBlocs implements Serializable {
 
+	
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 527435797083526876L;
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

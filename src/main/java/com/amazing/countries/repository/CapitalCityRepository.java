@@ -5,14 +5,16 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.amazing.countries.model.country.CapitalCity;
+import com.amazing.countries.model.country.Countries;
 
 @Repository
-public interface CapitalCityRepository extends JpaRepository<CapitalCity, Integer> {
-	public Optional<CapitalCity> findByCapital(String capital);
+public interface CapitalCityRepository extends JpaRepository<Countries, Integer> {
+//		public List<CapitalCity> findAll();
 
-	public Optional<CapitalCity> findByalpha2Code(String alpha2Code);
+	public Optional<Countries> findByCapital(String capital);
 
-	public Optional<CapitalCity> findByalpha3Code(String alpha3Code);
+	public Optional<Countries> findByalpha2Code(String alpha2Code);
+
+	public Optional<Countries> findByalpha3Code(String alpha3Code);
 
 }

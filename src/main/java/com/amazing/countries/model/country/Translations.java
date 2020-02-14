@@ -7,10 +7,12 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Translations implements Serializable {
 
+
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3255916796768430291L;
+	private static final long serialVersionUID = 1L;
 
 	private String de;
 

@@ -14,10 +14,8 @@ import javax.persistence.Table;
 public class Languages implements Serializable {
 	
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -2188388529555656495L;
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

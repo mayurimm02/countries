@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.amazing.countries.model.User;
-import com.amazing.countries.model.country.CapitalCity;
+import com.amazing.countries.model.country.Countries;
 import com.amazing.countries.repository.UserRepository;
 import com.amazing.countries.service.CountryService;
 
@@ -60,10 +60,10 @@ public class DbInit implements CommandLineRunner {
 	 */
 	public void insertIntoDatabase() {
 
-		List<CapitalCity> addedCountriesToDB = null;
-		List<CapitalCity> checkaddedCountries;
+		List<Countries> addedCountriesToDB = null;
+		List<Countries> checkaddedCountries;
 		String url = "https://restcountries.eu/rest/v2/all";
-		CapitalCity[] allCountries = restTemplate.getForObject(url, CapitalCity[].class);
+		Countries[] allCountries = restTemplate.getForObject(url, Countries[].class);
 		addedCountriesToDB = this.countryService.CountryData(allCountries);
 		// logger.info("***************** Status ************ " +
 		// addedCountriesToDB.toString());

@@ -12,12 +12,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Currencies")
 public class Currencies implements Serializable {
-	
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 6327731186200903338L;
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

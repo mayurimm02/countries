@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.amazing.countries.db.DataInsertionCheck;
-import com.amazing.countries.model.country.CapitalCity;
+import com.amazing.countries.model.country.Countries;
 import com.amazing.countries.repository.CapitalCityRepository;
 import com.amazing.countries.repository.DataInsertionCheckRepository;
 
@@ -21,7 +21,7 @@ public class CountryServiceImpl implements CountryService {
 	@Autowired
 	private CapitalCityRepository capitalCityRepository;
 
-	private Optional<CapitalCity> countryAlreadyExists;
+	private Optional<Countries> countryAlreadyExists;
 
 	@Autowired
 	private DataInsertionCheck insertionCheck;
@@ -32,13 +32,13 @@ public class CountryServiceImpl implements CountryService {
 	Logger logger = LoggerFactory.getLogger(CountryServiceImpl.class);
 
 	@Override
-	public List<CapitalCity> CountryData(CapitalCity[] allCountries) {
+	public List<Countries> CountryData(Countries[] allCountries) {
 		boolean isDataPresent = false;
-		List<CapitalCity> countryData = new ArrayList<CapitalCity>();
+		List<Countries> countryData = new ArrayList<Countries>();
 		int i = 1;
-		CapitalCity countries = null;
-		for (CapitalCity getCountry : allCountries) {
-			countries = new CapitalCity();
+		Countries countries = null;
+		for (Countries getCountry : allCountries) {
+			countries = new Countries();
 
 			countries.setName(getCountry.getName());
 			countries.setTopLevelDomain(getCountry.getTopLevelDomain());
@@ -75,11 +75,7 @@ public class CountryServiceImpl implements CountryService {
 				if (countryAlreadyExists.isPresent()) {
 					logger.info("*********************** Item at " + i + " alrady exists"
 							+ " *******************************");
-					/*
-					 * insertionCheck.setInsertedOnDate(new Date());
-					 * insertionCheck.setIsDataAlreadyPresent("Yes");
-					 * insertionCheck.setIsDataIntersted("false");
-					 */
+
 					isDataPresent = true;
 
 				} else {
@@ -95,6 +91,7 @@ public class CountryServiceImpl implements CountryService {
 			i++;
 
 		}
+
 		insertionCheck = new DataInsertionCheck();
 		if (isDataPresent) {
 			insertionCheck.setInsertedOnDate(new Date());

@@ -12,18 +12,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 //@JsonIgnoreProperties(value = "ignoreUnknown")
 @Entity
 @Table(name = "CapitalCity")
-public class CapitalCity implements Serializable {
+public class Countries implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 6934604958229531061L;
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name = "capital_id")
@@ -32,16 +30,19 @@ public class CapitalCity implements Serializable {
 
 	@Column
 	private String name;
+	@Lob
 	@Column
 	private ArrayList<String> topLevelDomain;
 	@Column
 	private String alpha2Code;
 	@Column
 	private String alpha3Code;
+	@Lob
 	@Column
 	private ArrayList<String> callingCodes;
 	@Column
 	private String capital;
+	@Lob
 	@Column
 	private ArrayList<String> altSpellings;
 	@Column
@@ -50,6 +51,7 @@ public class CapitalCity implements Serializable {
 	private String subregion;
 	@Column
 	private Long population;
+	@Lob
 	@Column
 	private ArrayList<String> latlng;
 	@Column
@@ -58,8 +60,10 @@ public class CapitalCity implements Serializable {
 	private Double area;
 	@Column
 	private Double gini;
+	@Lob
 	@Column
 	private ArrayList<String> timezones;
+	@Lob
 	@Column
 	private ArrayList<String> borders;
 	@Column
@@ -75,7 +79,7 @@ public class CapitalCity implements Serializable {
 	@JoinColumn(name = "capital_id", referencedColumnName = "capital_id")
 
 	private List<Languages> languages;
-	@Embedded	
+	@Embedded
 	private Translations translations;
 
 	@Column
